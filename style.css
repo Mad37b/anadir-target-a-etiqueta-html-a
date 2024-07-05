@@ -1,0 +1,45 @@
+/*estios Xoan*/
+    .contenedor{transform: rotate(180deg);}
+    body .contenedor div{background-color: red;}
+    body .contenedor{display: inline;}
+/*fin estilos Xoan*/
+body{background-color: aliceblue;}
+body div .contenedor div{color: blue;}
+p{text-align: center;font-size: 16px; font-family: Arial, Helvetica, sans-serif; font-weight: 200; }
+
+.contenedor{display: flex;justify-content: center; align-items: center;
+align-content: center;}
+a:hover{cursor: pointer;
+color: orange;}
+.enlaceIzquierdo,.enlaceDerecho{
+
+color: white;
+background-color: blue;
+margin: 10px;
+padding: 10px;
+
+}
+
+/** Empieza la corrección **/ 
+/**/
+html{ width: 1200px; height: 1600px;}
+
+
+html p { color : blue }
+/** correccción de la rotación **/
+html div { transform: rotate(180deg);}
+
+ html p { }
+
+html a {color :white}
+
+html .contenedor{display: flex; justify-content: center; align-content: center; padding: 100px;  }
+ 
+
+html a:hover{color:orange;}
+
+html .contenedor div { width:300px;  background-color: blue;}
+
+div.class2 div.class div.contenedor.span{background-color: red; width: 10px; height: 10px;}
+/* gmnghhjxtghjtxj */
+/** Acaba la la corrección **/ 
