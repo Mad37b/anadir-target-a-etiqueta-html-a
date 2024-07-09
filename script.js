@@ -1,48 +1,61 @@
-// buscar en la <a> --> <a href enlaces target=_blank
-// funcion añadirTargetfiltrado
-var etiquetaEnlaces = document.querySelectorAll("a")
-var regex = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n]+)/;
-var archivos = ['.jpg', '.png', '.pdf',];
-var dominios = [".com", ".es", "net", "org"];
-var esImagen; false;
 
-//1. comprueba si la etiqueta existe por lo menos alguno 
-if (etiquetaEnlaces.length > 0) {
-    // 1. verifica si existe href 
+(function () {
 
-    for (var i = 0; i < etiquetaEnlaces.length; i++) {
+    //variables 
+    var etiquetaEnlaces = document.querySelectorAll("a")
+    var regex = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n]+)/;
+    var archivos = ['.jpg', '.png', '.pdf',];
+    var host = location.href;
+    console.log ( host);
+    var contador = 0;
+    //funciones 
+    function anadirTarget(enlace) {
+        if (enlace) {
+            enlace.setAttribute('target', '_blank');
+            console.log("Target añadido al Enlace:" + enlace.href);
+        }
+    }
+    function removerTarget(enlace) {
+        if(enlace){
+        enlace.removeAttribute('target');
+        console.log ( "target removido del Enlace "+ enlace.href)
+    }
+    }
+    // 1.  
+    if (etiquetaEnlaces.length > 0) {
+        // 1. verifica si existe href 
+        // Tag A //
+        for (var i = 0; i < etiquetaEnlaces.length; i++) {
+            // atributo href //
         var enlace = etiquetaEnlaces[i].href;
-        console.log("test 1 " + etiquetaEnlaces[i].href);
+        var href = enlace.href;
+        console.log ( " prueba en el for " + enlace ) ; 
+       
+                // 2. 
+            if (etiquetaEnlaces[i] != host) {
+                anadirTarget(etiquetaEnlaces[i]);
+               
+                console.log(" Se añade target al enlace Externo  " + etiquetaEnlaces[i])
 
-        if (enlace.match(regex)[1] == location.hostname) {
-            console.log("Aqui esta la URL de la pagina web ----->" + window.location.hostname);
-        }// cierra 1º if 
-
-
-        // 2. Añadir target i son imagenes 
+            } else {
+                removerTarget(etiquetaEnlaces[i]);
+                console.log(" No se añade target al enlace Interno " + host)
+            }
+        }
+       
+        // 3. Añadir target si son imagenes 
         for (var j = 0; j < archivos.length; j++) {
-            if (enlace.endsWith(archivos[j])) {
-                esImagen = true;
-                console.log("test 2");
+            if (enlace.endsWith(archivos[j]) !=host) {
+                anadirTarget(etiquetaEnlaces[i]);
             }
-
             // mira si hay png en cualquier parte de la url 
-            if (!esImagen && enlace.includes(".png") || enlace.includes(".jpg") || enlace.includes(".pdf")) {
-                esImagen = true;
-                console.log ( ' mira si hay imagenes ')
+            if (enlace.includes(".png") || enlace.includes(".jpg") || enlace.includes(".pdf")) {
+                anadirTarget(etiquetaEnlaces[i]);
             }
 
         }
 
-
-        if (esImagen) {
-
-            etiquetaEnlaces[i].setAttribute('target', '_blank');
-            console.log("Enlace a imagen detectado:", enlace);
-        } else {
-            console.log("Enlace no es una imagen:", enlace);
-        }
 
     }
-}
 
+})();
